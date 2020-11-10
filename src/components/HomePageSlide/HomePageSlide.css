@@ -1,0 +1,141 @@
+.promo {
+    box-shadow: 0 7px 12px rgba(158, 158, 163, 0.1);
+    border-radius: 10px;
+    padding: 68px 70px;
+    margin-bottom: 56px;
+    min-height: 300px;
+}
+
+.pizza {
+    background: #fff1b8 url('../../img/promo/pizza.png') no-repeat top -100px right -250px / 830px
+}
+
+.kebab {
+    background: #D6E4FF url('../../img/promo/kebab.png') no-repeat top 45px right 40px / 450px;
+}
+
+.vegetables {
+    background: #FFF566 url('../../img/promo/vegetables.png') no-repeat top 0 right 0 / 825px
+}
+
+.sushi {
+    background: #FFF1F0 url('../../img/promo/sushi.png') no-repeat top 10px right 15px / 500px
+}
+
+.promo-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 39px;
+    line-height: 46px;
+    color: #302c34;
+}
+
+.promo-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #302c34;
+    max-width: 538px;
+}
+@media (max-width: 1366px) {
+    .pizza {
+        background-position: center right -300px;
+        background-size: 750px;
+    }
+
+    .kebab {
+        background-position: top -5px right -93px;
+        background-size: 530px;
+    }
+
+    .vegetables {
+        background-position: top 0 right -93px;
+        background-size: 820px;
+    }
+
+    .sushi {
+        background-position: center right -90px;
+    }
+}
+
+
+@media (max-width: 992px) {
+    .promo-text {
+        font-size: 18px;
+        max-width: 400px;
+    }
+
+    .pizza {
+        padding: 50px;
+        background-size: 500px;
+        background-position: center right -200px;
+    }
+
+    .kebab {
+        background-position: top 55px right -100px;
+        background-size: 385px;
+    }
+
+    .vegetables {
+        background-position: top 0 right -280px;
+        background-size: 810px;
+    }
+
+    .sushi {
+        background-position: top 30px right -175px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .promo-title {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    .promo-text {
+        margin-top: 0;
+    }
+    .pizza {
+        background-size: 400px;
+        background-position: bottom 50px right -200px;
+    }
+
+
+    .kebab {
+        background-position: top -5px right -74px;
+        background-size: 300px;
+    }
+
+    .vegetables {
+        background-position: top 0 right -240px;
+        background-size: 702px;
+    }
+
+    .sushi {
+        background-position: top -24px right -75px;
+        background-size: 302px;
+    }
+
+}
+
+
+@media (max-width: 578px) {
+    .promo {
+        background-image: none;
+    }
+
+    .promo-title {
+        margin-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .promo {
+        padding: 20px;
+    }
+}
+
+
