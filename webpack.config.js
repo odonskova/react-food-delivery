@@ -13,6 +13,9 @@ module.exports = {
             react: path.join(__dirname, 'node_modules', 'react'),
         },
     },
+    performance: {
+        hints: false
+    },
     module: {
         rules: [
             {
