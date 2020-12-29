@@ -7,9 +7,11 @@ import HomeHeader from "../HomeHeader/HomeHeader";
 import RestaurantMenu from "../RestaurantMenu/RestaurantMenu";
 import axios from "axios";
 import Partners from "../../context";
+import FooterNavbar from "../Footer/FooterNavbar";
 
 
 const HomePage = (props) => {
+    const {userName, addFood, logOut, toggleModalAuth, toggleModalCart} = props;
     const [displayMenu, setDisplayMenu] = useState(false);
     const [chosenRestaurant, setChosenRestaurant] = useState([]);
     const [restaurantMenu, setRestaurantMenu] = useState([]);
@@ -37,11 +39,8 @@ const HomePage = (props) => {
         if (!product.trim()) {
             return;
         }
-        if (props.userName) {
-            setDisplayMenu(true);
-        } else {
-            props.toggleModalAuth()
-        }
+        setDisplayMenu(true);
+
         if (!restaurant) {
             let filteredMenu = [];
             restaurantLinks.forEach(link => {
@@ -51,7 +50,7 @@ const HomePage = (props) => {
                             if (item.name.toLowerCase().includes(product.toLowerCase())) {
                                 filteredMenu.push(item)
                             }
-                            return setRestaurantMenu( [...filteredMenu])
+                            return setRestaurantMenu([...filteredMenu])
                         });
                     })
             });
@@ -74,13 +73,12 @@ const HomePage = (props) => {
         <section className="container">
 
             <HomeHeader
-                userName={props.userName}
-                logOut={props.logOut}
-                toggleModalAuth={props.toggleModalAuth}
-                toggleModalCart={props.toggleModalCart}
+                userName={userName}
+                logOut={logOut}
+                toggleModalAuth={toggleModalAuth}
+                toggleModalCart={toggleModalCart}
                 toggleRestaurantMenu={toggleRestaurantMenu}
             />
-
 
             <section className='main'>
                 <div className='container'>
@@ -103,21 +101,26 @@ const HomePage = (props) => {
                                         />
                                     </label>
                                 </div>
-                                <Restaurants restaurants={data} openMenu={openRestaurantMenu} />
+                                <Restaurants
+                                    restaurants={data}
+                                    openMenu={openRestaurantMenu}
+                                />
                             </section>
                         </>
                         : <RestaurantMenu
                             restaurantMenu={restaurantMenu}
                             chosenRestaurant={chosenRestaurant}
                             searchedDish={searchedDish}
-                            toggleModalCart={props.toggleModalCart}
-                            addFood={props.addFood}
+                            toggleModalCart={toggleModalCart}
+                            addFood={addFood}
                         />
-
                     }
                 </div>
             </section>
             {props.children}
+            <FooterNavbar
+                toggleRestaurantMenu={toggleRestaurantMenu}
+            />
         </section>
     )
 };

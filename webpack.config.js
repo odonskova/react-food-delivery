@@ -3,6 +3,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+    entry: {
+        app: [
+            'react-app-polyfill/stable',
+            './src/index.js',
+        ],
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',

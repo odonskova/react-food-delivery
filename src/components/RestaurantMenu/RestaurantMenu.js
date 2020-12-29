@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonUp from "../ButtonUp/ButtonUp";
 
 const RestaurantMenu = (props) => {
     const {restaurantMenu, chosenRestaurant, searchedDish, addFood} = props;
@@ -6,20 +7,23 @@ const RestaurantMenu = (props) => {
     return (
         <section className="menu">
             <div className="section-heading" >
+
                 {chosenRestaurant.length > 0
                     ? chosenRestaurant.map((item, index) => (
-                        <>
+                        <div key={index}>
                             <h2 className="section-title restaurant-title">{item.name}</h2>
-                            <div className="card-info" key={index}>
+                            <div className="card-info">
                                 <div className="rating">{item.stars}</div>
                                 <div className="price">{`От ${item.price} грн.`}</div>
                                 <div className="category">{item.kitchen}</div>
                             </div>
-                        </>
+                        </div>
                     ))
                     : <h2 className="section-title restaurant-title">{`Результаты поиска: "${searchedDish}"`}</h2>
                 }
+
             </div>
+            <ButtonUp />
             <div className="cards cards-menu container">
                 {restaurantMenu.map((item) => {
                         return (
@@ -36,7 +40,7 @@ const RestaurantMenu = (props) => {
                                     </div>
 
                                     <div className="card-buttons">
-                                        <button className="button button-primary button-add-cart" id={item.id} onClick={event => addFood(event, item.id, item.name, item.price)}>
+                                        <button className="button button-primary button-add-cart" id={item.id} onClick={() => addFood(item.id, item.name, item.price)}>
                                             <span className="button-card-text">В корзину</span>
                                             <span className="button-cart-svg" />
                                         </button>

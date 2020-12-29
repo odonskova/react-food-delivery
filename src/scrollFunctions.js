@@ -1,4 +1,4 @@
-export const disableScroll = function () {
+export const scrollFunctions = function () {
     document.body.dbScrollY = window.scrollY;
 
     document.body.style.cssText = `
@@ -16,5 +16,11 @@ export const enableScroll = function () {
     window.scroll({
         top: document.body.dbScrollY
     });
+};
+
+export const scrollUp = function () {
+    window.scroll({
+        top:  window.pageYOffset - window.scrollY
+    })
 };
 

@@ -18,26 +18,23 @@ const HomeHeader = (props) => {
             </label>
             <div className="buttons">
                 <span className="user-name"> {userName ? userName : null} </span>
+                <button className="button button-cart" id="cart-button" onClick={toggleModalCart}>
+                    <span className="button-cart-svg" />
+                    <span className="button-text">Корзина</span>
+                </button>
 
-                {!userName
-                    ? <button className="button button-primary button-auth" onClick={toggleModalAuth}>
-                        <span className="button-auth-svg" />
-                        <span className="button-text">Войти</span>
-                    </button>
-
-                    :
-                    <>
-                        <button className="button button-cart" id="cart-button" onClick={toggleModalCart}>
-                            <span className="button-cart-svg" />
-                            <span className="button-text">Корзина</span>
-                        </button>
-
-                        <button className="button button-primary button-out" onClick={logOut}>
+                <button className="button button-primary button-auth" onClick={!userName ? toggleModalAuth : logOut}>
+                    { !userName
+                        ? <>
+                            <span className="button-auth-svg" />
+                            <span className="button-text">Войти</span>
+                        </>
+                        :  <>
                             <span className="button-text">Выйти</span>
                             <span className="button-out-svg" />
-                        </button>
-                    </>
-                }
+                        </>
+                    }
+                </button>
             </div>
         </header>
 
