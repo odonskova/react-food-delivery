@@ -1,0 +1,18 @@
+.menu__btn {
+    background: #1890ff;
+    border: 1px solid #1890ff;
+    position: fixed;
+    border-radius: 50%;
+    margin: 10px;
+    left: 75%;
+}
+
+.menu__btn--up {
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    -webkit-mask: url("../../img/icon/scroll-up.svg") no-repeat 50% 50%;
+    mask: url("../../img/icon/scroll-up.svg") no-repeat 50% 50%;
+
+}
+
