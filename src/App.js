@@ -45,15 +45,6 @@ const App = () => {
         currentUser ? setUserName(currentUser) : setUserName('');
     }, [currentUser]);
 
-    useEffect(() => {
-        if (!currentUser) {
-            setCart([])
-        } else {
-            setCart(currentUser.cart)
-        }
-    }, []);
-
-
     const toggleModalAuth = () => {
         setModalAuth(!modalAuth);
     };
@@ -74,6 +65,7 @@ const App = () => {
 
     const logOut = () => {
         localStorage.removeItem('CurrentUser');
+        localStorage.removeItem('CurrentUserData');
         setUserName('')
     };
 

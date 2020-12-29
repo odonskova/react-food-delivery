@@ -8,6 +8,18 @@ const ModalCart = ({ closeCart, user }) => {
     const [order, setOrder] = useState([]);
     const [price, setPrice] = useState(totalPrice());
 
+    useEffect(() => {
+        if (!user || !currentUserData) {
+            setOrder([])
+        } else {
+            setOrder(currentUserData.cart)
+        }
+    }, []);
+
+    useEffect(() => {
+        setPrice(price)
+    }, []);
+
     function totalPrice() {
         let result = 0;
         if (!currentUserData) {
@@ -48,19 +60,6 @@ const ModalCart = ({ closeCart, user }) => {
         localStorage.setItem("DeliveryFoodData", JSON.stringify(newDeliveryData));
         localStorage.setItem("CurrentUserData", JSON.stringify(currentUserData));
     };
-
-    useEffect(() => {
-        if (!user && !currentUserData) {
-            setOrder([])
-        } else {
-            setOrder(currentUserData.cart)
-        }
-    }, []);
-
-    useEffect(() => {
-        setPrice(price)
-    }, []);
-
 
     return (
         <div className="modal modal-cart">
