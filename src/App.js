@@ -8,22 +8,6 @@ import ModalCart from "./components/Modals/ModalCart/ModalCart";
 import ModalRegistry from "./components/Modals/ModalRegistry/ModalRegistry";
 import {scrollFunctions, enableScroll} from "./scrollFunctions";
 
-const getCartInfo = () => {
-    const usersData = JSON.parse(localStorage.getItem("DeliveryFoodData"));
-    const currentUser = localStorage.getItem('CurrentUser');
-    let cart = [];
-    if (currentUser) {
-        let user = usersData.filter(item => item.user === currentUser);
-        cart = user.map(item => {
-            if (item.cart) {
-               return item.cart.map(data => cart.push(data))
-            } else {
-                return cart
-            }
-        })
-    }
-};
-
 const App = () => {
     const currentUser = localStorage.getItem('CurrentUser');
     const [modalAuth, setModalAuth] = useState(false);
@@ -44,6 +28,30 @@ const App = () => {
     useEffect(() => {
         currentUser ? setUserName(currentUser) : setUserName('');
     }, [currentUser]);
+
+    function getCartInfo() {
+        let cart = [];
+        const currentUserData = JSON.parse(localStorage.getItem("CurrentUserData"));
+
+        if (!currentUserData) {
+            return cart
+        } else {
+            const usersData = JSON.parse(localStorage.getItem("DeliveryFoodData"));
+            const currentUser = localStorage.getItem('CurrentUser');
+
+            if (currentUser) {
+                let user = usersData.filter(item => item.user === currentUser);
+                cart = user.map(item => {
+                    if (item.cart) {
+                        return item.cart.map(data => cart.push(data))
+                    } else {
+                        return cart
+                    }
+                })
+            }
+        }
+
+    }
 
     const toggleModalAuth = () => {
         setModalAuth(!modalAuth);
@@ -93,30 +101,15 @@ const App = () => {
         const food = cart.find(item => {
             return item.id === id
         });
+
         if (food) {
             food.count += 1
         } else {
             setCart(prev => [...prev, {id, title: name, cost, count: 1}]);
             saveOrder({id, title: name, cost, count: 1});
         }
-        // const addFoodToCart = (id, name, cost) => {
-        //     const food = cart.find(item => {
-        //         return item.id === id
-        //     });
-        //     if (food) {
-        //         food.count += 1;
-        //         const filteredCartData = cart.filter(order => order.id !== food.id);
-        //         const newFoodCount = {id, title: name, cost, count: food.count};
-        //         const newCartData = filteredCartData.concat(new Array(newFoodCount));
-        //         setCart(newCartData);
-        //         saveOrder(cart);
-        //     } else {
-        //         let newCartData = [{id, title: name, cost, count: 1}];
-        //         setCart(newCartData);
-        //         saveOrder(cart);
-        //     }
-
     };
+
 
     return (
         <BrowserRouter>
@@ -142,6 +135,7 @@ const App = () => {
                     {modalCart ? <ModalCart
                         user={userName}
                         closeCart={toggleModalCart}
+                        cart={cart}
                     /> : null}
 
                     {modalAuth ? <ModalAuth

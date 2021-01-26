@@ -5,19 +5,11 @@ import './ModalCart.css';
 const ModalCart = ({ closeCart, user }) => {
     const currentUserData = JSON.parse(localStorage.getItem("CurrentUserData"));
     const deliveryFoodData = JSON.parse(localStorage.getItem("DeliveryFoodData"));
-    const [order, setOrder] = useState([]);
+    const [order, setOrder] = useState(currentUserData ? currentUserData.cart : []);
     const [price, setPrice] = useState(totalPrice());
 
     useEffect(() => {
-        if (!user || !currentUserData) {
-            setOrder([])
-        } else {
-            setOrder(currentUserData.cart)
-        }
-    }, []);
-
-    useEffect(() => {
-        setPrice(price)
+        setPrice(price);
     }, []);
 
     function totalPrice() {
@@ -52,13 +44,15 @@ const ModalCart = ({ closeCart, user }) => {
     };
 
     const clearCart = () => {
-        setOrder([]);
-        setPrice(0);
+        if (user) {
+            const filteredDeliveryData = deliveryFoodData.filter(userData => userData.user !== user);
+            const newDeliveryData = [...filteredDeliveryData, ...new Array(currentUserData)];
+            localStorage.setItem("DeliveryFoodData", JSON.stringify(newDeliveryData));
+        }
         currentUserData.cart = [];
-        const filteredDeliveryData = deliveryFoodData.filter(userData => userData.user !== user);
-        const newDeliveryData = [...filteredDeliveryData, ...new Array(currentUserData)];
-        localStorage.setItem("DeliveryFoodData", JSON.stringify(newDeliveryData));
         localStorage.setItem("CurrentUserData", JSON.stringify(currentUserData));
+        setPrice(0);
+        setOrder([])
     };
 
     return (
